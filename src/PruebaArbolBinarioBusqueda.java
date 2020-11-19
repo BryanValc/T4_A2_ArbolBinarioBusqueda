@@ -31,6 +31,12 @@ class NodoArbol{
 	private int dato;
 	private NodoArbol nodoDer;
 	
+	public NodoArbol(int dato) {
+		this.dato = dato;
+	}
+	public NodoArbol(){
+	}
+	
 	public NodoArbol getNodoIzq() {
 		return nodoIzq;
 	}
@@ -62,6 +68,30 @@ class ArbolBinarioBusqueda{
 	
 	public ArbolBinarioBusqueda(){
 		nodoRaiz=null;
+	}
+	public void agergar(int dato) {
+		NodoArbol nuevoNodo = new NodoArbol(dato);
+		if(nodoRaiz==null) {
+			nodoRaiz = nuevoNodo;
+		}else {
+			
+			NodoArbol aux = nodoRaiz;
+			NodoArbol nodoAnterior;
+			
+			while(aux!=null) {
+				nodoAnterior = aux;
+				
+				if(dato>=aux.getDato()) {  //derecha
+					aux = aux.getNodoDer();
+					if(aux==null)
+						nodoAnterior.setNodoIzq(nuevoNodo);
+				}else { //izquierda
+					aux = aux.getNodoIzq();
+					if(aux==null)
+						nodoAnterior.setNodoDer(nuevoNodo);
+				}
+			}
+		}
 	}
 	
 	
