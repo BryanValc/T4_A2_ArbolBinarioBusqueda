@@ -69,7 +69,7 @@ class ArbolBinarioBusqueda{
 	public ArbolBinarioBusqueda(){
 		nodoRaiz=null;
 	}
-	public void agergar(int dato){
+	public void agregar(int dato){
 		NodoArbol nuevoNodo = new NodoArbol(dato);
 		if(nodoRaiz==null) {
 			nodoRaiz = nuevoNodo;
@@ -176,8 +176,13 @@ class ArbolBinarioBusqueda{
 		
 		
 	}
-		
-	
+	public void recorridoPreorden(NodoArbol nodoRaiz) {
+		if(nodoRaiz!=null) {
+			System.out.print(nodoRaiz.getDato() + " => ");
+			recorridoPreorden(nodoRaiz.getNodoIzq());
+			recorridoPreorden(nodoRaiz.getNodoDer());
+		}
+	}
 	
 }
 
@@ -187,6 +192,17 @@ public class PruebaArbolBinarioBusqueda {
 
 	public static void main(String[] args) {
 		
+		ArbolBinarioBusqueda abb = new ArbolBinarioBusqueda();	
+		
+		abb.agregar(7);
+		abb.agregar(14);
+		abb.agregar(3);
+		abb.agregar(9);
+		abb.agregar(37);
+		abb.agregar(1);
+		abb.eliminarDato(7);
+		
+		abb.recorridoPreorden(abb.nodoRaiz);
 		
 
 	}
