@@ -183,6 +183,13 @@ class ArbolBinarioBusqueda{
 			recorridoPreorden(nodoRaiz.getNodoDer());
 		}
 	}
+	public void recorridoEnorden(NodoArbol nodoRaiz) {
+		if(!(nodoRaiz==null)) {
+			recorridoEnorden(nodoRaiz.getNodoIzq());
+			System.out.print(nodoRaiz.getDato() + " => ");
+			recorridoEnorden(nodoRaiz.getNodoDer());
+		}
+	}
 	
 }
 
@@ -203,6 +210,9 @@ public class PruebaArbolBinarioBusqueda {
 		abb.eliminarDato(7);
 		
 		abb.recorridoPreorden(abb.nodoRaiz);
+		System.out.println();
+		abb.recorridoEnorden(abb.nodoRaiz);
+		System.out.println();
 		
 
 	}
