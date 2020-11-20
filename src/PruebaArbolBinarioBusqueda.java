@@ -224,12 +224,21 @@ class ArbolBinarioBusqueda{
 				nodoAnterior = aux;
 				aux = aux.getNodoDer();
 				if(aux==null) {
-					System.out.println("el numero mayor es: "+nodoAnterior.getDato());
+					System.out.println("el numero menor es: "+nodoAnterior.getDato());
 				}
 			}
 		}
 	}
-	
+	public int buscarDato(NodoArbol nodo, int dato,int encontrado) {
+		if(nodo!=null) {
+			if(dato==nodo.getDato()) {
+				encontrado+=1;
+			}
+			encontrado+=buscarDato(nodo.getNodoIzq(),dato,encontrado);
+			encontrado+=buscarDato(nodo.getNodoDer(),dato,encontrado);
+		}
+		return encontrado;
+	}
 	
 	
 }
@@ -258,6 +267,8 @@ public class PruebaArbolBinarioBusqueda {
 		System.out.println();
 		abb.mostrarDatoMayor();
 		abb.mostrarDatoMenor();
+		System.out.println(abb.buscarDato(abb.nodoRaiz, 3, 0));
+		
 
 	}
 
