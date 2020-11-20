@@ -118,7 +118,7 @@ class ArbolBinarioBusqueda{
 			while(aux!=null&&aux.getDato()!=dato) {
 					nodoAnterior = aux;
 					
-					if(aux.getDato()>=dato) {
+					if(aux.getDato()<=dato) {
 						esIzq=true;
 						aux = aux.getNodoIzq();
 					}else {
@@ -141,7 +141,7 @@ class ArbolBinarioBusqueda{
 				}else {
 					nodoAnterior.setNodoDer(null);
 				}
-			}else if(aux.getNodoDer()==null) {
+			}else if(aux.getNodoIzq()==null) {
 				if(aux==nodoRaiz) {
 					nodoRaiz = aux.getNodoDer();
 				}else if(esIzq) {
@@ -149,7 +149,7 @@ class ArbolBinarioBusqueda{
 				}else {
 					nodoAnterior.setNodoDer(aux.getNodoDer());
 				}
-			}else if(aux.getNodoIzq()==null) {
+			}else if(aux.getNodoDer()==null) {
 				if(aux==nodoRaiz) {
 					nodoRaiz = aux.getNodoIzq();
 				}else if(esIzq) {
