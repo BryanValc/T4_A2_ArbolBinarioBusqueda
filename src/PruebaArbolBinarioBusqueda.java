@@ -213,6 +213,22 @@ class ArbolBinarioBusqueda{
 			}
 		}
 	}
+	public void mostrarDatoMenor() {
+		if(nodoRaiz==null) {
+			System.out.println("el arbol esta vacio");
+		}else {
+			NodoArbol aux = nodoRaiz;
+			NodoArbol nodoAnterior;
+			
+			while(aux!=null) {
+				nodoAnterior = aux;
+				aux = aux.getNodoDer();
+				if(aux==null) {
+					System.out.println("el numero mayor es: "+nodoAnterior.getDato());
+				}
+			}
+		}
+	}
 	
 	
 	
@@ -241,6 +257,7 @@ public class PruebaArbolBinarioBusqueda {
 		abb.recorridoPostorden(abb.nodoRaiz);
 		System.out.println();
 		abb.mostrarDatoMayor();
+		abb.mostrarDatoMenor();
 
 	}
 
