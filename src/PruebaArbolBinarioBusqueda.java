@@ -250,24 +250,75 @@ public class PruebaArbolBinarioBusqueda {
 	public static void main(String[] args) {
 		
 		ArbolBinarioBusqueda abb = new ArbolBinarioBusqueda();	
+		byte opc=0;
+		byte opc2=0;
+		int dato,num;
+		boolean salir=false;
+		boolean salir1=false;
 		
-		abb.agregar(7);
-		abb.agregar(14);
-		abb.agregar(3);
-		abb.agregar(9);
-		abb.agregar(37);
-		abb.agregar(1);
-		abb.eliminarDato(7);
-		
-		abb.recorridoPreorden(abb.nodoRaiz);
-		System.out.println();
-		abb.recorridoEnorden(abb.nodoRaiz);
-		System.out.println();
-		abb.recorridoPostorden(abb.nodoRaiz);
-		System.out.println();
-		abb.mostrarDatoMayor();
-		abb.mostrarDatoMenor();
-		System.out.println(abb.buscarDato(abb.nodoRaiz, 3, 0));
+		do {
+			System.out.println("1)Crear arbol\n2)Insertar nodo\n3)Eliminar nodo\n4)Mostrar nodos\n5)Mostrar dato mayor\n6)Mostrar dato menor\n7)Buscar dato\n8)Salir");
+			opc = (byte) Validacion.validacionNatural();
+			switch (opc) {
+			case 1:
+				abb = new ArbolBinarioBusqueda();
+				System.out.println("Arbol creado exitosamente");
+				break;
+			case 2:
+				System.out.println("elemento a insertar: ");
+				dato = Validacion.validacionNatural();
+				abb.agregar(dato);
+				break;
+			case 3:
+				System.out.println("elemento a eliminar: ");
+				dato = Validacion.validacionNatural();
+				abb.eliminarDato(dato);
+				break;
+			case 4:
+				do {
+					salir=false;
+					System.out.println("\n1)Preorden\n2)Inorden\n3)Postorden\n4)Salir");
+					opc2 = (byte) Validacion.validacionNatural();
+					
+					switch (opc2) {
+					case 1:
+						abb.recorridoPreorden(abb.nodoRaiz);
+						break;
+					case 2:
+						abb.recorridoEnorden(abb.nodoRaiz);
+						break;
+					case 3:
+						abb.recorridoPostorden(abb.nodoRaiz);
+						break;
+					case 4:
+						salir=true;
+						break;
+					default:
+						System.out.println("Opcion no valida");
+						break;
+					}
+					
+				} while (!salir);
+				System.out.println();
+				break;
+			case 5:
+				abb.mostrarDatoMayor();
+				break;
+			case 6:
+				abb.mostrarDatoMenor();
+				break;
+			case 7:
+				System.out.println("dato a buscar: ");
+				dato = Validacion.validacionNatural();
+				System.out.println(abb.buscarDato(abb.nodoRaiz, dato, 0)>0?"se encontro el dato":"no se encontro el dato");
+				break;
+			case 8:
+				salir1=true;break;
+			default:
+				System.out.println("Opcion no valida");break;
+			}
+		} while (!salir1);
+		System.out.println("\nFin de ejecucion");
 		
 
 	}
