@@ -69,7 +69,7 @@ class ArbolBinarioBusqueda{
 	public ArbolBinarioBusqueda(){
 		nodoRaiz=null;
 	}
-	public void agergar(int dato) {
+	public void agergar(int dato){
 		NodoArbol nuevoNodo = new NodoArbol(dato);
 		if(nodoRaiz==null) {
 			nodoRaiz = nuevoNodo;
@@ -81,18 +81,102 @@ class ArbolBinarioBusqueda{
 			while(aux!=null) {
 				nodoAnterior = aux;
 				
-				if(dato>=aux.getDato()) {  //derecha
-					aux = aux.getNodoDer();
+				if(dato>=aux.getDato()) {
+					aux = aux.getNodoIzq();
 					if(aux==null)
 						nodoAnterior.setNodoIzq(nuevoNodo);
-				}else { //izquierda
-					aux = aux.getNodoIzq();
+				}else {
+					aux = aux.getNodoDer();
 					if(aux==null)
 						nodoAnterior.setNodoDer(nuevoNodo);
 				}
 			}
 		}
 	}
+	public NodoArbol desplazar(NodoArbol nodo){
+		NodoArbol anterior = nodo;
+		NodoArbol ret = nodo;
+		NodoArbol aux = nodo.getNodoDer();
+		
+		while(aux!=null){
+			anterior = ret;
+			ret = aux;
+			aux= aux.getNodoIzq();
+		}
+		if(ret!=nodo.getNodoDer()){
+			anterior.setNodoIzq(ret.getNodoDer());
+			ret.setNodoIzq(nodo.getNodoDer());
+		}
+		return ret;		
+	}
+	public boolean eliminarDato(int dato) {
+		if (nodoRaiz!=null) {
+			boolean esIzq=false;
+			NodoArbol nodoAnterior = nodoRaiz;
+			NodoArbol aux = nodoRaiz;
+			
+			while(aux!=null&&aux.getDato()!=dato) {
+					nodoAnterior = aux;
+					
+					if(aux.getDato()>=dato) {
+						esIzq=true;
+						aux = aux.getNodoIzq();
+					}else {
+						esIzq=false;
+						aux = aux.getNodoDer();
+					}
+			}
+			if (aux==null) {
+				System.out.println("no se encontro el dato");
+				return false;
+			}else {
+				System.out.println("se encontro el dato");
+			}
+			
+			if(aux.getNodoIzq()==null && aux.getNodoDer()==null) {
+				if(aux==nodoRaiz)
+					nodoRaiz = null;
+				else if(esIzq) {
+					nodoAnterior.setNodoIzq(null);
+				}else {
+					nodoAnterior.setNodoDer(null);
+				}
+			}else if(aux.getNodoDer()==null) {
+				if(aux==nodoRaiz) {
+					nodoRaiz = aux.getNodoDer();
+				}else if(esIzq) {
+					nodoAnterior.setNodoIzq(aux.getNodoDer());
+				}else {
+					nodoAnterior.setNodoDer(aux.getNodoDer());
+				}
+			}else if(aux.getNodoIzq()==null) {
+				if(aux==nodoRaiz) {
+					nodoRaiz = aux.getNodoIzq();
+				}else if(esIzq) {
+					nodoAnterior.setNodoIzq(aux.getNodoIzq());
+				}else {
+					nodoAnterior.setNodoDer(aux.getNodoIzq());
+				}
+			}else {
+				NodoArbol desp = desplazar(aux);
+				if(aux==nodoRaiz) {
+					nodoRaiz = desp;
+				}else if(esIzq) {
+					nodoAnterior.setNodoIzq(desp);
+				}else
+					nodoAnterior.setNodoDer(desp);
+				
+				desp.setNodoIzq(aux.getNodoIzq());
+			}
+			return true;
+		}else {
+			System.out.println("el arbol esta vacio");
+			return false;
+		}
+		
+		
+	}
+		
 	
 	
 }
